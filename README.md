@@ -12,3 +12,7 @@ Via Composer
 ```bash
 $ composer require patrykwozinski/redirector
 ```
+
+## Contributing
+
+Please see [contributing.md](contributing.md) for details.
