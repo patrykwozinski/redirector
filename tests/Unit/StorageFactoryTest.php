@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Predis\Client;
 use PHPUnit\Framework\TestCase;
 use Freeq\Redirector\StorageFactory;
 use Freeq\Redirector\Contracts\StorageInterface;
@@ -13,13 +14,13 @@ class StorageFactoryTest extends TestCase
      */
     public function test_Build_IncorrectData_ThrowsException()
     {
-        StorageFactory::build(['type' => 'wrong', 'params' => null]);
+        StorageFactory::build(['type' => 'wrong', 'source' => null]);
     }
 
     public function test_Build_FileStorage_Ok()
     {
         $storage = StorageFactory::build([
-            'type' => 'file', 'params' => __DIR__
+            'type' => 'file', 'source' => __DIR__
         ]);
 
         $this->assertInstanceOf(StorageInterface::class, $storage);
@@ -28,7 +29,7 @@ class StorageFactoryTest extends TestCase
     public function test_Build_RedisStorage_Ok()
     {
         $storage = StorageFactory::build([
-            'type' => 'redis', 'params' => []
+            'type' => 'redis', 'source' => $this->createMock(Client::class)
         ]);
 
         $this->assertInstanceOf(StorageInterface::class, $storage);

@@ -17,7 +17,7 @@ abstract class StorageFactory
             . static::STORAGE_SUFIX;
 
         if (class_exists($storage_path)) {
-            return new $storage_path($storage['params']);
+            return new $storage_path($storage['source']);
         }
 
         throw CannotCreateStorage::driverDoesntExists($storage['type']);

@@ -10,9 +10,9 @@ class RedisStorage extends AbstractStorage implements StorageInterface
 {
     private $connection;
 
-    public function __construct(array $connection)
+    public function __construct(Client $connection)
     {
-        $this->connection = new Client($connection);
+        $this->connection = $connection;
     }
 
     public function get(string $keyword): ?array

@@ -8,7 +8,7 @@ use Freeq\Redirector\Contracts\Redirectable;
 use Freeq\Redirector\Storages\AbstractStorage;
 use Freeq\Redirector\Contracts\StorageInterface;
 
-class AbstractStorageTest extends TestCase
+class FileStorageTest extends TestCase
 {
     private $storage_path;
     private $redirect;
