@@ -1,0 +1,15 @@
+{
+    "name": "freeq/redirector",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Patryk Woziński",
+            "email": "patryk.wozinski@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "predis/predis": "^1.1"
+    }
+}
