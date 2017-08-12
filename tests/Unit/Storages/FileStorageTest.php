@@ -10,13 +10,16 @@ use Freeq\Redirector\Contracts\StorageInterface;
 
 class AbstractStorageTest extends TestCase
 {
+    private $storage_path;
     private $redirect;
 
     public function setUp()
     {
         parent::setUp();
 
-        mkdir(__DIR__ . '/redirects', 0775);
+        $this->storage_path = __DIR__ . '/redirects';
+
+        mkdir($this->storage_path, 0775);
 
         $this->redirect = $this->getMockBuilder(Redirectable::class)
             ->getMock();
@@ -49,18 +52,28 @@ class AbstractStorageTest extends TestCase
 
     public function test_Store_CustomHash_Ok()
     {
-        $storage = new FileStorage(__DIR__ . '/redirects');
+        $storage = new FileStorage($this->storage_path);
         $storage->setRedirect($this->redirect);
         $storage->store();
 
-        $this->assertTrue(file_exists(__DIR__ . '/redirects/filename'));
+        $this->assertTrue(file_exists($this->storage_path . '/filename'));
+    }
+
+    public function test_Flush_Ok()
+    {
+        $storage = new FileStorage($this->storage_path);
+        $storage->setRedirect($this->redirect);
+        touch($this->storage_path . '/flush_me');
+        $storage->flush();
+
+        $this->assertFalse(file_exists($this->storage_path . '/flush_me'));
     }
 
     public function tearDown()
     {
-        if (is_dir(__DIR__ . '/redirects')) {
-            array_map('unlink', glob(__DIR__ . '/redirects/*'));
-            rmdir(__DIR__ . '/redirects');
+        if (is_dir($this->storage_path)) {
+            array_map('unlink', glob($this->storage_path . '/*'));
+            rmdir($this->storage_path);
         }
 
         if (is_dir(__DIR__ . '/test')) {
