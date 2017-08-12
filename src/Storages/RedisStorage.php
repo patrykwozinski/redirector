@@ -29,7 +29,7 @@ class RedisStorage extends AbstractStorage implements StorageInterface
         if ($this->redirect->expireAt()) {
             $this->connection->expireAt(
                 $this->redirect->hash(),
-                strtotime($this->redirect->expireAt())
+                $this->getExpireInSeconds()
             );
         }
     }
@@ -42,5 +42,10 @@ class RedisStorage extends AbstractStorage implements StorageInterface
     public function flush(): void
     {
         $this->connection->FLUSHDB();
+    }
+
+    private function getExpireInSeconds(): int
+    {
+        return max(0, strtotime($this->redirect->expireAt()) - time());
     }
 }

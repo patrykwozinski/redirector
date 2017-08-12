@@ -12,6 +12,7 @@ use Freeq\Redirector\Contracts\StorageInterface;
 class RedisStorageTest extends TestCase
 {
     private $redirect;
+    private $storage;
 
     public function setUp()
     {
@@ -21,26 +22,46 @@ class RedisStorageTest extends TestCase
 
         $this->redirect->method('hash')
             ->willReturn(md5('filename'));
-        $this->redirect->method('expireAt')
-            ->willReturn('2020-02-02');
+
+        $this->storage = new RedisStorage($this->createMock(Client::class));
+        $this->storage->setRedirect($this->redirect);
     }
 
     public function test_Constructor_Redirectable_Ok()
     {
-        $storage = new RedisStorage($this->createMock(Client::class));
-        $storage->setRedirect($this->redirect);
-
-        $this->assertInstanceOf(AbstractStorage::class, $storage);
-        $this->assertInstanceOf(StorageInterface::class, $storage);
+        $this->assertInstanceOf(AbstractStorage::class, $this->storage);
+        $this->assertInstanceOf(StorageInterface::class, $this->storage);
     }
 
-    public function test_Store_WithExpire_Ok()
+    public function test_Store_WithExpire_Expired_Ok()
     {
+        $this->redirect->method('expireAt')
+            ->willReturn('2000-01-01');
 
+        $this->storage->store();
+
+        $this->assertEmpty($this->storage->get('filename'));
     }
 
-    public function test_Store_WithoutExpire_Ok()
+    public function test_Delete_Ok()
     {
-        //
+        try {
+            $this->storage->delete();
+        } catch (\Exception $e) {
+            $this->fail();
+        }
+
+        $this->assertTrue(true);
+    }
+
+    public function test_Flush_Ok()
+    {
+        try {
+            $this->storage->flush();
+        } catch (\Exception $e) {
+            $this->fail();
+        }
+
+        $this->assertTrue(true);
     }
 }
