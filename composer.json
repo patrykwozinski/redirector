@@ -14,9 +14,18 @@
         "php": ">=7.1.0",
         "predis/predis": "^1.1"
     },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~6.0"
+    },
     "autoload": {
         "psr-4": {
             "Freeq\\Redirector\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     }
 }

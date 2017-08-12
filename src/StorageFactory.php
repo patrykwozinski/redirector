@@ -20,6 +20,6 @@ abstract class StorageFactory
             return new $storage_path($storage['params']);
         }
 
-        throw CannotCreateStorage::driverDoesntExists($storage_type);
+        throw CannotCreateStorage::driverDoesntExists($storage['type']);
     }
 }
