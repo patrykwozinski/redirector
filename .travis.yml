@@ -1,0 +1,18 @@
+language: php
+
+php: 7.1
+
+sudo: false
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - vendor
+
+before_install:
+  - composer self-update
+  - nvm install 8.1.2
+
+before_script:
+  - composer install --prefer-source --no-interaction --dev

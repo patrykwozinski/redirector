@@ -1,5 +1,6 @@
 {
     "name": "freeq/redirector",
+    "description": "Manage your redirections easily.",
     "type": "library",
     "license": "MIT",
     "authors": [
