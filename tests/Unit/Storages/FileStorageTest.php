@@ -25,7 +25,7 @@ class AbstractStorageTest extends TestCase
             ->getMock();
 
         $this->redirect->method('hash')
-            ->willReturn('filename');
+            ->willReturn(md5('filename'));
     }
 
     /**
@@ -56,7 +56,33 @@ class AbstractStorageTest extends TestCase
         $storage->setRedirect($this->redirect);
         $storage->store();
 
-        $this->assertTrue(file_exists($this->storage_path . '/filename'));
+        $this->assertTrue(file_exists($this->storage_path . '/' . md5('filename')));
+    }
+
+    public function test_Get_ValidAndInvalidHash()
+    {
+        $storage = new FileStorage($this->storage_path);
+        $storage->setRedirect($this->redirect);
+        $storage->store();
+
+        $valid = $storage->get('filename');
+        $invalid = $storage->get('wrongfilename');
+
+        $this->assertEmpty($invalid);
+        $this->assertTrue(is_null($invalid));
+        $this->assertArrayHasKey('from', $valid);
+        $this->assertArrayHasKey('to', $valid);
+        $this->assertArrayHasKey('from', $valid);
+    }
+
+    public function test_Delete_Ok()
+    {
+        $storage = new FileStorage($this->storage_path);
+        $storage->setRedirect($this->redirect);
+        $storage->store();
+        $storage->delete();
+
+        $this->assertFalse(file_exists($this->storage_path . '/filename'));
     }
 
     public function test_Flush_Ok()
