@@ -1,13 +1,13 @@
 <?php
 
-namespace Redirector;
+namespace Freeq\Redirector;
 
-use Redirector\Contracts\StorageInterface;
-use Redirector\Exceptions\CannotCreateStorage;
+use Freeq\Redirector\Contracts\StorageInterface;
+use Freeq\Redirector\Exceptions\CannotCreateStorage;
 
 abstract class StorageFactory
 {
-    const NAMESPACE = '\Redirector\Storages\\';
+    const NAMESPACE = '\Freeq\Redirector\Storages\\';
     const STORAGE_SUFIX = 'Storage';
 
     public static function build(array $storage): StorageInterface

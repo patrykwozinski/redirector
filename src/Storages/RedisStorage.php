@@ -1,10 +1,10 @@
 <?php
 
-namespace Redirector\Storages;
+namespace Freeq\Redirector\Storages;
 
 use Predis\Client;
-use Redirector\Storages\AbstractStorage;
-use Redirector\Contracts\StorageInterface;
+use Freeq\Redirector\Storages\AbstractStorage;
+use Freeq\Redirector\Contracts\StorageInterface;
 
 class RedisStorage extends AbstractStorage implements StorageInterface
 {

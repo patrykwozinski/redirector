@@ -1,8 +1,8 @@
 <?php
 
-namespace Redirector\Contracts;
+namespace Freeq\Redirector\Contracts;
 
-use Redirector\Contracts\Redirectable;
+use Freeq\Redirector\Contracts\Redirectable;
 
 interface StorageInterface
 {

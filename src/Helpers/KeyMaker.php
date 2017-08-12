@@ -1,6 +1,6 @@
 <?php
 
-namespace Redirector\Helpers;
+namespace Freeq\Redirector\Helpers;
 
 trait KeyMaker
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Redirector\Storages;
+namespace Freeq\Redirector\Storages;
 
-use Redirector\Storages\AbstractStorage;
-use Redirector\Contracts\StorageInterface;
-use Redirector\Exceptions\CannotUseFileStorage;
+use Freeq\Redirector\Storages\AbstractStorage;
+use Freeq\Redirector\Contracts\StorageInterface;
+use Freeq\Redirector\Exceptions\CannotUseFileStorage;
 
 class FileStorage extends AbstractStorage implements StorageInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Redirector\Storages;
+namespace Freeq\Redirector\Storages;
 
-use Redirector\Helpers\KeyMaker;
-use Redirector\Contracts\Redirectable;
+use Freeq\Redirector\Helpers\KeyMaker;
+use Freeq\Redirector\Contracts\Redirectable;
 
 abstract class AbstractStorage
 {

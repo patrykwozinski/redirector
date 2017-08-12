@@ -1,9 +1,9 @@
 <?php
 
-namespace Redirector;
+namespace Freeq\Redirector;
 
-use Redirector\StorageFactory;
-use Redirector\Contracts\Redirectable;
+use Freeq\Redirector\StorageFactory;
+use Freeq\Redirector\Contracts\Redirectable;
 
 class Manager
 {

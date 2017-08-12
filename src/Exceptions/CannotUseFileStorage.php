@@ -1,6 +1,6 @@
 <?php
 
-namespace Redirector\Exceptions;
+namespace Freeq\Redirector\Exceptions;
 
 use Exception;
 

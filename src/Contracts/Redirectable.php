@@ -1,6 +1,6 @@
 <?php
 
-namespace Redirector\Contracts;
+namespace Freeq\Redirector\Contracts;
 
 interface Redirectable
 {
