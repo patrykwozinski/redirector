@@ -24,4 +24,13 @@ class StorageFactoryTest extends TestCase
 
         $this->assertInstanceOf(StorageInterface::class, $storage);
     }
+
+    public function test_Build_RedisStorage_Ok()
+    {
+        $storage = StorageFactory::build([
+            'type' => 'redis', 'params' => []
+        ]);
+
+        $this->assertInstanceOf(StorageInterface::class, $storage);
+    }
 }
