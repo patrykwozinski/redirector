@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Freeq\Redirector\StorageFactory;
-use Freeq\Redirector\Exceptions\CannotCreateStorage;
+use Freeq\Redirector\Contracts\StorageInterface;
 
 class StorageFactoryTest extends TestCase
 {
@@ -14,5 +14,14 @@ class StorageFactoryTest extends TestCase
     public function test_Build_IncorrectData_ThrowsException()
     {
         StorageFactory::build(['type' => 'wrong', 'params' => null]);
+    }
+
+    public function test_Build_FileStorage_Ok()
+    {
+        $storage = StorageFactory::build([
+            'type' => 'file', 'params' => __DIR__
+        ]);
+
+        $this->assertInstanceOf(StorageInterface::class, $storage);
     }
 }
