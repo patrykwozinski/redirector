@@ -9,6 +9,7 @@ use Freeq\Redirector\Contracts\StorageInterface;
 
 class ManagerTest extends TestCase
 {
+    private $path;
     private $redirect;
     private $manager;
 
@@ -16,14 +17,15 @@ class ManagerTest extends TestCase
     {
         parent::setUp();
 
+        $this->path = __DIR__ . '/redirects';
         $this->redirect = $this->getMockBuilder(Redirectable::class)->getMock();
         $this->redirect->method('hash')->willReturn(md5('filename'));
 
-        mkdir(__DIR__ . '/redirects');
+        mkdir($this->path, 0775);
 
         $this->manager = new Manager([
             'type' => 'file',
-            'source' => __DIR__ . '/redirects',
+            'source' => $this->path,
         ], $this->redirect);
     }
 
@@ -35,22 +37,33 @@ class ManagerTest extends TestCase
     public function test_Store_Ok()
     {
         $this->manager->store();
+
+        $this->assertTrue(file_exists($this->path . '/' . md5('filename')));
     }
 
     public function test_Delete_Ok()
     {
+        touch($this->path . '/' . md5('filename'));
         $this->manager->delete();
+
+        $this->assertFalse(file_exists($this->path . '/' . md5('filename')));
     }
 
     public function test_Flush_Ok()
     {
+        touch($this->path . '/' . 'file1');
+        touch($this->path . '/' . 'file2');
+        touch($this->path . '/' . 'file3');
+
         $this->manager->flush();
+
+        $this->assertEquals(count(scandir($this->path)), 2);
     }
 
     public function tearDown()
     {
         array_map('unlink', glob(__DIR__ . '/redirects/*'));
-        rmdir(__DIR__ . '/redirects');
+        rmdir($this->path);
 
         parent::tearDown();
     }
