@@ -19,7 +19,10 @@ class ManagerTest extends TestCase
 
         $this->path = __DIR__ . '/redirects';
         $this->redirect = $this->getMockBuilder(Redirectable::class)->getMock();
-        $this->redirect->method('hash')->willReturn(md5('filename'));
+        $this->redirect->method('hash')->willReturn(md5('myroute'));
+        $this->redirect->method('routeFrom')->willReturn('myroute');
+        $this->redirect->method('routeTo')->willReturn('to');
+        $this->redirect->method('statusHttp')->willReturn(302);
 
         mkdir($this->path, 0775);
 
@@ -38,15 +41,15 @@ class ManagerTest extends TestCase
     {
         $this->manager->store();
 
-        $this->assertTrue(file_exists($this->path . '/' . md5('filename')));
+        $this->assertTrue(file_exists($this->path . '/' . md5('myroute')));
     }
 
     public function test_Delete_Ok()
     {
-        touch($this->path . '/' . md5('filename'));
+        touch($this->path . '/' . md5('myroute'));
         $this->manager->delete();
 
-        $this->assertFalse(file_exists($this->path . '/' . md5('filename')));
+        $this->assertFalse(file_exists($this->path . '/' . md5('myroute')));
     }
 
     public function test_Flush_Ok()
