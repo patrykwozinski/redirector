@@ -17,7 +17,7 @@ $ composer require freeq/redirector
 
 ## Using
 
-Use package everywhere you need. The best way to manage your redirections is run it in Observer or other event listener. You should store redirections after saving to the database, drop them from store after removing database record. Every redirect object should implement `Redirectable` contract.
+Use package everywhere you need. The best way to manage your redirections is to run it in Observer or other event listener. You should store redirections after saving to the database, drop them from store after removing database record. Every redirect object should implement `Redirectable` contract.
 
 ### Create manager
 
