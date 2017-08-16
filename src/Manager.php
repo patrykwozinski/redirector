@@ -4,17 +4,15 @@ namespace Freeq\Redirector;
 
 use Freeq\Redirector\StorageFactory;
 use Freeq\Redirector\Contracts\Redirectable;
+use Freeq\Redirector\Storages\AbstractStorage;
 
 class Manager
 {
     private $storage;
-    private $redirect;
 
-    public function __construct(array $storage_params = [], Redirectable $redirect = null)
+    public function __construct(AbstractStorage $storage)
     {
-        $this->storage = StorageFactory::build($storage_params)
-            ->setRedirect($redirect);
-        $this->redirect = $redirect;
+        $this->storage = $storage;
     }
 
     public function forward(string $current_route = ''): void

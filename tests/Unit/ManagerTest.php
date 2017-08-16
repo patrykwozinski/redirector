@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use Freeq\Redirector\Manager;
 use PHPUnit\Framework\TestCase;
+use Freeq\Redirector\Storages\FileStorage;
 use Freeq\Redirector\Contracts\Redirectable;
 
 class ManagerTest extends TestCase
@@ -24,11 +25,8 @@ class ManagerTest extends TestCase
         $this->redirect->method('statusHttp')->willReturn(302);
 
         mkdir($this->path, 0775);
-
-        $this->manager = new Manager([
-            'type' => 'file',
-            'source' => $this->path,
-        ], $this->redirect);
+        $storage = (new FileStorage($this->path))->setRedirect($this->redirect);
+        $this->manager = new Manager($storage);
     }
 
     public function test_Constructor_Ok()
