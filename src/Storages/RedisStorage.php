@@ -4,9 +4,8 @@ namespace Freeq\Redirector\Storages;
 
 use Predis\Client;
 use Freeq\Redirector\Storages\AbstractStorage;
-use Freeq\Redirector\Contracts\StorageInterface;
 
-class RedisStorage extends AbstractStorage implements StorageInterface
+class RedisStorage extends AbstractStorage
 {
     private $connection;
 

@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use Freeq\Redirector\Manager;
 use PHPUnit\Framework\TestCase;
 use Freeq\Redirector\Contracts\Redirectable;
-use Freeq\Redirector\Contracts\StorageInterface;
 
 class ManagerTest extends TestCase
 {

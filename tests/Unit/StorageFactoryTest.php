@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Predis\Client;
 use PHPUnit\Framework\TestCase;
 use Freeq\Redirector\StorageFactory;
-use Freeq\Redirector\Contracts\StorageInterface;
+use Freeq\Redirector\Storages\AbstractStorage;
 
 class StorageFactoryTest extends TestCase
 {
@@ -23,7 +23,7 @@ class StorageFactoryTest extends TestCase
             'type' => 'file', 'source' => __DIR__
         ]);
 
-        $this->assertInstanceOf(StorageInterface::class, $storage);
+        $this->assertInstanceOf(AbstractStorage::class, $storage);
     }
 
     public function test_Build_RedisStorage_Ok()
@@ -32,6 +32,6 @@ class StorageFactoryTest extends TestCase
             'type' => 'redis', 'source' => $this->createMock(Client::class)
         ]);
 
-        $this->assertInstanceOf(StorageInterface::class, $storage);
+        $this->assertInstanceOf(AbstractStorage::class, $storage);
     }
 }

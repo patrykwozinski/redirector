@@ -25,4 +25,12 @@ abstract class AbstractStorage
             . ';' . $this->redirect->routeTo()
             . ';' . $this->redirect->statusHttp();
     }
+
+    public abstract function get(string $keyword): ?array;
+
+    public abstract function store(): void;
+
+    public abstract function delete(): void;
+
+    public abstract function flush(): void;
 }

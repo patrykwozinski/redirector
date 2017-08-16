@@ -3,10 +3,9 @@
 namespace Freeq\Redirector\Storages;
 
 use Freeq\Redirector\Storages\AbstractStorage;
-use Freeq\Redirector\Contracts\StorageInterface;
 use Freeq\Redirector\Exceptions\CannotUseFileStorage;
 
-class FileStorage extends AbstractStorage implements StorageInterface
+class FileStorage extends AbstractStorage
 {
     private $storage_path;
 

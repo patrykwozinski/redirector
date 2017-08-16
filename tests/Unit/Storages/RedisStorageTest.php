@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Freeq\Redirector\Storages\RedisStorage;
 use Freeq\Redirector\Contracts\Redirectable;
 use Freeq\Redirector\Storages\AbstractStorage;
-use Freeq\Redirector\Contracts\StorageInterface;
 
 class RedisStorageTest extends TestCase
 {
@@ -30,7 +29,6 @@ class RedisStorageTest extends TestCase
     public function test_Constructor_Redirectable_Ok()
     {
         $this->assertInstanceOf(AbstractStorage::class, $this->storage);
-        $this->assertInstanceOf(StorageInterface::class, $this->storage);
     }
 
     public function test_Store_WithExpire_Expired_Ok()

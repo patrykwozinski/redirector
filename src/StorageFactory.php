@@ -2,7 +2,7 @@
 
 namespace Freeq\Redirector;
 
-use Freeq\Redirector\Contracts\StorageInterface;
+use Freeq\Redirector\Storages\AbstractStorage;
 use Freeq\Redirector\Exceptions\CannotCreateStorage;
 
 abstract class StorageFactory
@@ -10,7 +10,7 @@ abstract class StorageFactory
     const NAMESPACE = '\Freeq\Redirector\Storages\\';
     const STORAGE_SUFIX = 'Storage';
 
-    public static function build(array $storage): StorageInterface
+    public static function build(array $storage): AbstractStorage
     {
         $storage_path = static::NAMESPACE
             . ucfirst($storage['type'])

@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Freeq\Redirector\Storages\FileStorage;
 use Freeq\Redirector\Contracts\Redirectable;
 use Freeq\Redirector\Storages\AbstractStorage;
-use Freeq\Redirector\Contracts\StorageInterface;
 
 class FileStorageTest extends TestCase
 {
@@ -47,7 +46,6 @@ class FileStorageTest extends TestCase
         $storage->setRedirect($this->redirect);
 
         $this->assertInstanceOf(AbstractStorage::class, $storage);
-        $this->assertInstanceOf(StorageInterface::class, $storage);
     }
 
     public function test_Store_CustomHash_Ok()
