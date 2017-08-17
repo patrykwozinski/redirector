@@ -12,6 +12,14 @@ abstract class AbstractStorage
     protected $redirect;
     protected $keys = ['from', 'to', 'status_http'];
 
+    public abstract function get(string $keyword): ?array;
+
+    public abstract function store(): void;
+
+    public abstract function delete(): void;
+
+    public abstract function flush(): void;
+
     public function setRedirect(Redirectable $redirect = null): self
     {
         $this->redirect = $redirect;
@@ -25,12 +33,4 @@ abstract class AbstractStorage
             . ';' . $this->redirect->routeTo()
             . ';' . $this->redirect->statusHttp();
     }
-
-    public abstract function get(string $keyword): ?array;
-
-    public abstract function store(): void;
-
-    public abstract function delete(): void;
-
-    public abstract function flush(): void;
 }
