@@ -28,16 +28,14 @@ use Freeq\Redirector\Manager;
 $redirect_object = Redirect::findById(1); // must implement Redirectable!
 
 // Using file driver.
-$manager = new Manager([
-	'type' => 'file',
-	'source' => '/path/to/store/them',
-], $redirect_object);
+$storage = new FileStorage('/path/to/store/them');
+$storage->setRedirect($redirect_object);
+$manager = new Manager($storage);
 
 // Using redis driver.
-$manager = new Manager([
-	'type' => 'redis',
-	'source' => new Predis\Client(),
-], $redirect_object);
+$storage = RedisStorage(new Predis\Client());
+$storage->setRedirect($redirect_object);
+$manager = new Manager($storage);
 ```
 
 ### Manage Redirectable object
