@@ -2,8 +2,10 @@
 
 namespace Tests\Unit;
 
+use Predis\Client;
 use PHPUnit\Framework\TestCase;
 use Freeq\Redirector\StorageFactory;
+use Freeq\Redirector\Storages\AbstractStorage;
 use Freeq\Redirector\Exceptions\CannotCreateStorage;
 
 class StorageFactoryTest extends TestCase
@@ -18,11 +20,18 @@ class StorageFactoryTest extends TestCase
 
     public function test_Build_Redis_InstanceOfAbstract()
     {
-        $storage = StorageFactory::build('redis', null);
+        $predis = $this->getMockBuilder(Client::class)->getMock();
+
+        $this->assertInstanceOf(
+            AbstractStorage::class, StorageFactory::build('redis', $predis)
+        );
     }
 
     public function test_Build_File_InstanceOfAbstract()
     {
-        $storage = StorageFactory::build('file', null);
+        $this->assertInstanceOf(
+            AbstractStorage::class,
+            StorageFactory::build('file', __DIR__)
+        );
     }
 }
