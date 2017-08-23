@@ -36,6 +36,13 @@ $manager = new Manager($storage);
 $storage = RedisStorage(new Predis\Client());
 $storage->setRedirect($redirect_object);
 $manager = new Manager($storage);
+
+// Otherwise u can use StorageFactory.
+// $type is storage name (file or redis)
+// $source is path for FileStorage or Predis Client for RedisStorage
+$storage = StorageFactory::build($type, $source);
+$storage->setRedirect($redirect_object);
+$manager = new Manager($storage);
 ```
 
 ### Manage Redirectable object
