@@ -33,7 +33,7 @@ $storage->setRedirect($redirect_object);
 $manager = new Manager($storage);
 
 // Using redis driver.
-$storage = RedisStorage(new Predis\Client());
+$storage = new RedisStorage(new Predis\Client());
 $storage->setRedirect($redirect_object);
 $manager = new Manager($storage);
 
